@@ -223,6 +223,9 @@ public:
     friend class ModeThrow;
     friend class ModeZigZag;
     friend class ModeAutorotate;
+// -------------------- Aqui se modifica ------
+    friend class ModeMymode;
+// --------------------------------------------
 
     Copter(void);
 
@@ -970,7 +973,11 @@ private:
 #if MODE_AUTOROTATE_ENABLED == ENABLED
     ModeAutorotate mode_autorotate;
 #endif
-
+// --------------------- Se modifica aqui
+#if MODE_MYMODE_ENABLED == ENABLED
+    ModeMymode mode_mymode;
+#endif
+// ---------------------------------------
     // mode.cpp
     Mode *mode_from_mode_num(const Mode::Number mode);
     void exit_mode(Mode *&old_flightmode, Mode *&new_flightmode);

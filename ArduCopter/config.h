@@ -265,6 +265,12 @@
 # define MODE_BRAKE_ENABLED ENABLED
 #endif
 
+// ************************ aqui se modifica
+#ifndef MODE_MYMODE
+# define MODE_MYMODE_ENABLED ENABLED
+#endif
+// ******************************************
+
 //////////////////////////////////////////////////////////////////////////////
 // Circle - fly vehicle around a central point
 #ifndef MODE_CIRCLE_ENABLED
@@ -388,22 +394,22 @@
 //
 
 #ifndef FLIGHT_MODE_1
- # define FLIGHT_MODE_1                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_1                  Mode::Number::MYMODE
 #endif
 #ifndef FLIGHT_MODE_2
- # define FLIGHT_MODE_2                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_2                  Mode::Number::MYMODE
 #endif
 #ifndef FLIGHT_MODE_3
- # define FLIGHT_MODE_3                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_3                  Mode::Number::MYMODE
 #endif
 #ifndef FLIGHT_MODE_4
- # define FLIGHT_MODE_4                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_4                  Mode::Number::MYMODE
 #endif
 #ifndef FLIGHT_MODE_5
- # define FLIGHT_MODE_5                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_5                  Mode::Number::MYMODE
 #endif
 #ifndef FLIGHT_MODE_6
- # define FLIGHT_MODE_6                  Mode::Number::STABILIZE
+ # define FLIGHT_MODE_6                  Mode::Number::MYMODE
 #endif
 
 
