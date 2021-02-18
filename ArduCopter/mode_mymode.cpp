@@ -7,9 +7,10 @@
 
 
 #include "copter.h"
-#include "UserVariables.h"
+//#include "UserVariables.h"
 
 void ModeMymode::run(){
+g.a_roll=ahrs.roll;
 
 }
 

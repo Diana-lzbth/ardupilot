@@ -26,6 +26,7 @@ void Copter::userhook_50Hz()
 void Copter::userhook_MediumLoop()
 {
     // put your 10Hz code here
+	hal.console->printf("%.2f\t %.2f\t %.2f\n",float(g.a_roll),ahrs.pitch,ahrs.yaw);
 }
 #endif
 
