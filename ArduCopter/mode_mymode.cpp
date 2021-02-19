@@ -10,7 +10,12 @@
 //#include "UserVariables.h"
 
 void ModeMymode::run(){
-g.a_roll=ahrs.roll;
+
+	g.a_roll=ahrs.roll;
+	const AP_InertialSensor &ins = AP::ins();
+	const Vector3f &gyroRAW = ins.get_gyro();
+
+	hal.console->printf("%.2f\n",(float)gyroRAW[1]);
 
 }
 

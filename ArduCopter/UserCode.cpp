@@ -1,10 +1,16 @@
 #include "Copter.h"
+#include <AP_GPS/AP_GPS.h>
 
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
     // put your initialisation code here
     // this will be called once at start-up
+
+	// Initialize the UART for GPS system
+		    serial_manager.init();
+		    gps.init(serial_manager);
+
 }
 #endif
 
@@ -25,6 +31,7 @@ void Copter::userhook_50Hz()
 #ifdef USERHOOK_MEDIUMLOOP
 void Copter::userhook_MediumLoop()
 {
+
     // put your 10Hz code here
 	hal.console->printf("%.2f\t %.2f\t %.2f\n",float(g.a_roll),ahrs.pitch,ahrs.yaw);
 }
