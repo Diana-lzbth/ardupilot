@@ -4,16 +4,8 @@
 // variables
 #ifdef USERHOOK_VARIABLES
 
-/*#if WII_CAMERA == 1
-WiiCamera           ircam;
-int                 WiiRange=0;
-int                 WiiRotation=0;
-int                 WiiDisplacementX=0;
-int                 WiiDisplacementY=0;
-#endif */ // WII_CAMERA
-
-/*float angulo_roll;
-float c_roll=0,c_pitch=0,c_yaw=0;*/
+float Th_d, PD_Th;// Theta_deseado, PD_Theta
+float PD_aleron,alabeo_d; //PD_alerones, angulo alabeo_deseado
 
 #endif  // USERHOOK_VARIABLES
 
