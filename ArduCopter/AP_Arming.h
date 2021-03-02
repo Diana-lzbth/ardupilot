@@ -59,6 +59,8 @@ private:
 
     // actually contains the pre-arm checks.  This is wrapped so that
     // we can store away success/failure of the checks.
+// ------------------------- Se modifico aqui ---------------------
+ //   bool run_pre_arm_checks(bool False);
     bool run_pre_arm_checks(bool display_failure);
 
 };

@@ -471,8 +471,32 @@ public:
     AP_Int8                 acro_trainer;
     AP_Float                acro_rp_expo;
     ///////////////Generando MY GLOBAL VARIABLES///////////////////
-    AP_Float				a_roll;
+    AP_Int8					Bandera_50Hz;
+
+// --------------Variables de lectura de IMU ---------------------
+    AP_Float				IMU_deg_roll;
+    AP_Float				IMU_deg_pitch;
+    AP_Float				IMU_deg_yaw;
+// ------------ Variables de lectura de canales RC ---------------
+    AP_Int16 				RC_roll;
+    AP_Int16 				RC_pitch;
+    AP_Int16 				RC_yaw;
+    AP_Int16 				RC_throttle;
+    AP_Int16 				RC_aux_1;
+    AP_Int16 				RC_aux_2;
+// -------------- Variables de lectura de GPS --------------------
+    AP_Int16 				GPS_pos_x;
+    AP_Int16 				GPS_pos_y;
+    AP_Int16 				GPS_pos_z;
+    AP_Int16 				GPS_vel_x;
+    AP_Int16 				GPS_vel_y;
+    AP_Int16 				GPS_vel_z;
+
+
+
     //////////////////////////////////////////////////////////////
+
+
 
     // Note: keep initializers here in the same order as they are declared
     // above.
