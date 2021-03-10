@@ -12,17 +12,13 @@
 #define DISABLE DISABLED
 
 
-	float Th_d, PD_Th;// Theta_deseado, PD_Theta
-	float PD_aleron,alabeo_d; //PD_alerones, angulo alabeo_deseado
+	float PD_pitch , Th_d     = 0.0;  // Theta_deseado, PD_Theta
+	float PD_roll  , alabeo_d = 0.0;  //PD_alerones, angulo alabeo_deseado
 
 	uint16_t PWM_Roll;
 
-//	bool bandera_50Hz = false;
-
     uint16_t Mypwm = 1500;
     int8_t Mydelta = 1;
-
- //   uint8_t i =  0;
 
 
 

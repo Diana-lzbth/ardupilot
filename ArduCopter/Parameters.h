@@ -478,7 +478,8 @@ public:
     AP_Float				IMU_deg_pitch;
     AP_Float				IMU_deg_yaw;
 // ------------ Variables de lectura de canales RC ---------------
-    AP_Int16 				RC_roll;
+    AP_Int16 				RC_roll_a;
+    AP_Int16 				RC_roll_b;
     AP_Int16 				RC_pitch;
     AP_Int16 				RC_yaw;
     AP_Int16 				RC_throttle;

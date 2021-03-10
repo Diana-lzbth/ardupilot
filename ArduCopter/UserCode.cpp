@@ -9,6 +9,7 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
+			//initialised_ok()
 //	hal.rcout->force_safety_off();
 //	AC_PosControl->set_alt_target_to_current_alt();
 
@@ -65,10 +66,38 @@ void Copter::userhook_FastLoop()
 void Copter::userhook_50Hz()
 {
     // put your 50Hz codes here
+//    SRV_Channels::set_output_pwm(SRV_Channel::k_elevator, RC_Channels::rc_channel(CH_1)->get_radio_in());
+//    SRV_Channels::constrain_pwm(SRV_Channel::k_elevator);
+
+//    SRV_Channels::set_output_pwm(SRV_Channel::k_rudder, RC_Channels::rc_channel(CH_2)->get_radio_in());
+//    SRV_Channels::constrain_pwm(SRV_Channel::k_rudder);
+
+	SRV_Channels::set_output_pwm_chan(1, g.RC_pitch);
+	SRV_Channels::set_output_pwm_chan(2, g.RC_yaw);
+	SRV_Channels::set_output_pwm_chan(3, g.RC_throttle);
+	SRV_Channels::set_output_pwm_chan(4, g.RC_roll_a);
+	SRV_Channels::set_output_pwm_chan(5, g.RC_roll_b);
 
 
-	g.Bandera_50Hz = 1;
- /*   for (uint8_t i = 0; i < 8; i++) {
+
+//    SRV_Channels::set_output_pwm(SRV_Channel::k_rcin3, RC_Channels::rc_channel(CH_3)->get_radio_in());
+//    SRV_Channels::constrain_pwm(SRV_Channel::k_rcin3);
+//	g.Bandera_50Hz = 1;
+/*	hal.rcout->write(CH_1, Mypwm);
+	hal.rcout->write(CH_2, Mypwm);
+	hal.rcout->write(CH_3, Mypwm);
+//
+	Mypwm += Mydelta;
+
+	if (Mydelta > 0 && Mypwm >= 2000) {
+		Mydelta = -1;
+//		hal.console->printf(" 1 ");
+	}
+	if (Mydelta < 0 && Mypwm <= 1000) {
+		Mydelta = 1;
+//		hal.console->printf(" 0 ");
+	}
+ //*   for (uint8_t i = 0; i < 8; i++) {
     	hal.rcout->write(i, Mypwm);
     	Mypwm += Mydelta;
     	if (Mydelta > 0 && Mypwm >= 2000) {
@@ -86,10 +115,20 @@ void Copter::userhook_50Hz()
 void Copter::userhook_MediumLoop()
 {
     // put your 10Hz code here
+	//copter.arm_motors_check();
+
+//	SRV_Channels::copy_radio_in_out_mask(CH_1);
+
+	hal.console->printf(" %f ",(float)g.RC_throttle);
+
 //	valor_RC_8 = hal.rcin->num_channels();
 
 //	MyRC.pitch    = hal.rcin->read(1); 		//Palanca derecha: abajo y arriba de 1004 a 2000, 1500 nominal
-
+/*	if (copter.sensor_health.compass && g.Bandera_50Hz == 1){
+		hal.console->printf(" TRUE ");
+		g.Bandera_50Hz = false;
+	}
+	hal.console->printf(" %f %f ",(float)g.IMU_deg_roll,(float)g.IMU_deg_pitch);*/
 
 //	RC_Channel_aux::set_servo_out(CH_4,4500);
 
@@ -98,6 +137,7 @@ void Copter::userhook_MediumLoop()
 	}
 	else if(MyRC.roll <= 1000){
 		MyRC.roll = 1000;
+
 
 	}*/
 /*	MyRC.pitch    = hal.rcin->read(1); 		//Palanca derecha: abajo y arriba de 1004 a 2000, 1500 nominal
@@ -134,6 +174,20 @@ void Copter::userhook_MediumLoop()
 //	hal.rcout->write(0,g.RC_roll);
 //	hal.rcout->write(1,g.RC_pitch);
 //	hal.rcout->write(2,g.RC_throttle);
+
+
+//	hal.rcout->write(CH_2, Mypwm);
+//	hal.rcout->write(CH_3, Mypwm);
+//
+//	Mypwm += Mydelta;
+//	if (Mydelta > 0 && Mypwm >= 2000) {
+//		Mydelta = -1;
+//		hal.console->printf(" 1 ");
+//	}
+//	if (Mydelta < 0 && Mypwm <= 1000) {
+//		Mydelta = 1;
+//		hal.console->printf(" 0 ");
+//	}
 }
 #endif
 
