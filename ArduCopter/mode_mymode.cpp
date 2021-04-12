@@ -19,7 +19,26 @@
 #define kdA 4.2216
 
 
-//#define kiA
+//#define kiA7
+
+/*********************************COMPASS***************************/
+
+/*static AP_BoardConfig board_config;
+
+class DummyVehicle {
+public:
+    AP_AHRS_DCM ahrs;  // Need since https://github.com/ArduPilot/ardupilot/pull/10890
+    AP_Baro baro; // Compass tries to set magnetic model based on location.
+};
+
+static DummyVehicle vehicle;
+// create compass object
+static Compass compass;
+
+uint32_t timer;*/
+
+
+/*******************************************************************/
 
 bool ModeMymode::init(bool ignore_checks)
 {
@@ -32,15 +51,42 @@ bool ModeMymode::init(bool ignore_checks)
 //	copter.enable_motor_output();
 
 //	copter.default_dead_zones();
-	hal.rcout->enable_ch(CH_1);
+/*	hal.rcout->enable_ch(CH_1);
 	hal.rcout->enable_ch(CH_2);
 	hal.rcout->enable_ch(CH_3);
 	hal.rcout->set_freq(CH_1, 50);
 	hal.rcout->set_freq(CH_2, 50);
 	hal.rcout->set_freq(CH_3, 490);
+*/
 
-	copter.motors->armed(true);
-	hal.rcout->force_safety_off();
+	//copter.motors->armed(true);
+	//hal.rcout->force_safety_off();
+
+
+	/****************************SETUP BRUJULA**********************************/
+
+	/*hal.console->printf("Compass library test\n");
+
+	   board_config.init();
+	    vehicle.ahrs.init();
+	    compass.init();
+
+	    if (hal.util->get_soft_armed()) {
+	        hal.console->printf("Software armed") ;
+	    	//return;
+	        }
+
+
+	    hal.console->printf("init done - %u compasses detected\n", compass.get_count());
+
+	    // set offsets to account for surrounding interference
+	    compass.set_and_save_offsets(0, Vector3f(0, 0, 0));
+	    // set local difference between magnetic north and true north
+	    compass.set_declination(ToRad(0.0f));
+
+	    timer = AP_HAL::micros();*/
+
+	/***************************************************************************/
 
     return true;
 }
@@ -86,6 +132,77 @@ void ModeMymode::run(){
 	g.GPS_pos_y = Position_GPS[1];
 	g.GPS_pos_z = Position_GPS[2];
 
+	//----------------Lectura de BRUJULA------------------------/
+
+	hal.rcout->write(CH_1, g.RC_roll);
+	hal.rcout->write(CH_2, g.RC_pitch);
+	hal.rcout->write(CH_3, g.RC_throttle);
+
+
+	/* static const uint8_t compass_count = compass.get_count();
+	    static float min[COMPASS_MAX_INSTANCES][3];
+	    static float max[COMPASS_MAX_INSTANCES][3];
+	    static float offset[COMPASS_MAX_INSTANCES][3];
+
+	    // run read() at 10Hz
+	    if ((AP_HAL::micros() - timer) > 100000L) {
+	        timer = AP_HAL::micros();
+	        compass.read();
+	        const uint32_t read_time = AP_HAL::micros() - timer;
+
+	        for (uint8_t i = 0; i < compass_count; i++) {
+	            float heading;
+
+	            hal.console->printf("Compass #%u: ", i);
+
+	            if (!compass.healthy()) {
+	                hal.console->printf("not healthy\n");
+	                continue;
+	            }
+
+	            Matrix3f dcm_matrix;
+	            // use roll = 0, pitch = 0 for this example
+	            dcm_matrix.from_euler(0, 0, 0);
+	            heading = compass.calculate_heading(dcm_matrix, i);
+
+	            const Vector3f &mag = compass.get_field(i);
+
+	            // capture min
+	            min[i][0] = MIN(mag.x, min[i][0]);
+	            min[i][1] = MIN(mag.y, min[i][1]);
+	            min[i][2] = MIN(mag.z, min[i][2]);
+
+	            // capture max
+	            max[i][0] = MAX(mag.x, max[i][0]);
+	            max[i][1] = MAX(mag.y, max[i][1]);
+	            max[i][2] = MAX(mag.z, max[i][2]);
+
+	            // calculate offsets
+	            offset[i][0] = -(max[i][0] + min[i][0]) / 2;
+	            offset[i][1] = -(max[i][1] + min[i][1]) / 2;
+	            offset[i][2] = -(max[i][2] + min[i][2]) / 2;
+
+	            // display all to user
+	            hal.console->printf("Heading: %.2f (%3d, %3d, %3d)",
+	                                (double)ToDeg(heading),
+	                                (int)mag.x,
+	                                (int)mag.y,
+	                                (int)mag.z);
+
+	            // display offsets
+	            hal.console->printf(" offsets(%.2f, %.2f, %.2f)",
+	                                (double)offset[i][0],
+	                                (double)offset[i][1],
+	                                (double)offset[i][2]);
+
+	            hal.console->printf(" t=%u", (unsigned)read_time);
+
+	            hal.console->printf("\n");
+	        }
+	    }*/
+
+
+	//---------------------------------------------------------------/
 	/*    for (uint8_t i=0; i < 14; i++) {
     	i = i + 1;
 //        hal.rcout->write(i, Mypwm);
@@ -99,7 +216,7 @@ void ModeMymode::run(){
         }
     }*/
 //	hal.rcout->write(0, MyRC.roll);
-	if (g.Bandera_50Hz == 1){
+/*	if (g.Bandera_50Hz == 1){
 		hal.rcout->write(CH_1, Mypwm);
 		hal.rcout->write(CH_2, Mypwm);
 //
@@ -113,11 +230,13 @@ void ModeMymode::run(){
 //			hal.console->printf(" normalizing ");
 		}
 		g.Bandera_50Hz = 0;
-		hal.console->printf(" 1 ");
+		///Diana lo comento
+		//hal.console->printf(" 1 ");
 	}
 	else{
-		hal.console->printf(" 0 ");
+		///Diana lo comento
+		//hal.console->printf(" 0 ");
 	}
-	hal.rcout->write(CH_3, Mypwm);
+	hal.rcout->write(CH_3, Mypwm);*/
 }
 
