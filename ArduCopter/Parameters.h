@@ -471,7 +471,7 @@ public:
     AP_Int8                 acro_trainer;
     AP_Float                acro_rp_expo;
     ///////////////Generando MY GLOBAL VARIABLES///////////////////
-    AP_Int8					Bandera_50Hz;
+    AP_Int8					Bandera_10Hz;
 
 // --------------Variables de lectura de IMU ---------------------
     AP_Float				IMU_deg_roll;
@@ -483,8 +483,6 @@ public:
     AP_Int16 				RC_pitch;
     AP_Int16 				RC_yaw;
     AP_Int16 				RC_throttle;
-    AP_Int16 				RC_aux_1;
-    AP_Int16 				RC_aux_2;
 // -------------- Variables de lectura de GPS --------------------
     AP_Int16 				GPS_pos_x;
     AP_Int16 				GPS_pos_y;
@@ -492,8 +490,13 @@ public:
     AP_Int16 				GPS_vel_x;
     AP_Int16 				GPS_vel_y;
     AP_Int16 				GPS_vel_z;
+//---------------Variables cálculo de control-----------------------
+    AP_Float				pitch_ctrl;
+    AP_Float				roll_ctrl;
 
-
+//---------------Variable guardar en mem-------------
+    unsigned char bufff[8];
+    uint16_t offset;
 
     //////////////////////////////////////////////////////////////
 

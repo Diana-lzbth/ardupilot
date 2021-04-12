@@ -1,56 +1,8 @@
 #include "Copter.h"
-//#include <AP_GPS/AP_GPS.h>
-//#include "UserVariables.h"
-//#include "AP_BoardConfig/AP_BoardConfig.h"
-
-
-//const AP_HAL::HAL& hal = AP_HAL::get_HAL();
 
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-			//initialised_ok()
-//	hal.rcout->force_safety_off();
-//	AC_PosControl->set_alt_target_to_current_alt();
-
-    // put your initialisation code here
-    // this will be called once at start-up
-
-	// Initialize the UART for GPS system
-//	serial_manager.init();
-	//AP_BoardConfig BoardConfig;
-
-//	const AP_HAL::HAL& hal = AP_HAL::get_HAL();
-
-//	gps.init(serial_manager);
-
-//	BoardConfig.io_enabled();
-
-//	hal.rcout->set_default_rate(490);
-
-//	hal.rcout->init();
-//	hal.rcout->enable_px4io_sbus_out(490);
-/*	hal.rcout->enable_ch(0);
-	hal.rcout->enable_ch(1);
-	hal.rcout->enable_ch(CH_2);
-	hal.rcout->enable_ch(CH_3);*/
-	//hal.rcout->set_freq(CH_1, 50);
-
-//    hal.rcin->init();
- //   hal.rcout->init();
-
-//    uint8_t i = 0;
-
-/*    hal.console->printf("Starting AP_HAL::RCOutput test\n");
- #if CONFIG_HAL_BOARD == HAL_BOARD_CHIBIOS
-     BoardConfig.init();
- #endif
-
-    for (uint8_t i = 0; i< 8; i++) {
-        hal.rcout->enable_ch(i);
-        hal.rcout->set_freq(i, 490);
-    }
-*/
 
 }
 #endif
@@ -65,129 +17,22 @@ void Copter::userhook_FastLoop()
 #ifdef USERHOOK_50HZLOOP
 void Copter::userhook_50Hz()
 {
-    // put your 50Hz codes here
-//    SRV_Channels::set_output_pwm(SRV_Channel::k_elevator, RC_Channels::rc_channel(CH_1)->get_radio_in());
-//    SRV_Channels::constrain_pwm(SRV_Channel::k_elevator);
 
-//    SRV_Channels::set_output_pwm(SRV_Channel::k_rudder, RC_Channels::rc_channel(CH_2)->get_radio_in());
-//    SRV_Channels::constrain_pwm(SRV_Channel::k_rudder);
+//-------------------------- Escibir motores-----------------------------
 
-	SRV_Channels::set_output_pwm_chan(1, g.RC_pitch);
-	SRV_Channels::set_output_pwm_chan(2, g.RC_yaw);
-	SRV_Channels::set_output_pwm_chan(3, g.RC_throttle);
-	SRV_Channels::set_output_pwm_chan(4, g.RC_roll_a);
-	SRV_Channels::set_output_pwm_chan(5, g.RC_roll_b);
+			hal.rcout->write(0, g.RC_roll_b);
+			hal.rcout->write(1, g.RC_pitch);
+			hal.rcout->write(2, g.RC_yaw);
+			hal.rcout->write(3, g.RC_throttle);
+//-----------------------------------------------------------------------
 
-
-
-//    SRV_Channels::set_output_pwm(SRV_Channel::k_rcin3, RC_Channels::rc_channel(CH_3)->get_radio_in());
-//    SRV_Channels::constrain_pwm(SRV_Channel::k_rcin3);
-//	g.Bandera_50Hz = 1;
-/*	hal.rcout->write(CH_1, Mypwm);
-	hal.rcout->write(CH_2, Mypwm);
-	hal.rcout->write(CH_3, Mypwm);
-//
-	Mypwm += Mydelta;
-
-	if (Mydelta > 0 && Mypwm >= 2000) {
-		Mydelta = -1;
-//		hal.console->printf(" 1 ");
-	}
-	if (Mydelta < 0 && Mypwm <= 1000) {
-		Mydelta = 1;
-//		hal.console->printf(" 0 ");
-	}
- //*   for (uint8_t i = 0; i < 8; i++) {
-    	hal.rcout->write(i, Mypwm);
-    	Mypwm += Mydelta;
-    	if (Mydelta > 0 && Mypwm >= 2000) {
-    		Mydelta = -1;
-    		hal.console->printf("reversing\n");
-    	} else if (Mydelta < 0 && Mypwm <= 1000) {
-    		Mydelta = 1;
-    		hal.console->printf("normalizing\n");
-    	}
-    }*/
 }
 #endif
 
 #ifdef USERHOOK_MEDIUMLOOP
 void Copter::userhook_MediumLoop()
 {
-    // put your 10Hz code here
-	//copter.arm_motors_check();
-
-//	SRV_Channels::copy_radio_in_out_mask(CH_1);
-
-	hal.console->printf(" %f ",(float)g.RC_throttle);
-
-//	valor_RC_8 = hal.rcin->num_channels();
-
-//	MyRC.pitch    = hal.rcin->read(1); 		//Palanca derecha: abajo y arriba de 1004 a 2000, 1500 nominal
-/*	if (copter.sensor_health.compass && g.Bandera_50Hz == 1){
-		hal.console->printf(" TRUE ");
-		g.Bandera_50Hz = false;
-	}
-	hal.console->printf(" %f %f ",(float)g.IMU_deg_roll,(float)g.IMU_deg_pitch);*/
-
-//	RC_Channel_aux::set_servo_out(CH_4,4500);
-
-/*	if(MyRC.roll >= 2000){
-		MyRC.roll = 2000;
-	}
-	else if(MyRC.roll <= 1000){
-		MyRC.roll = 1000;
-
-
-	}*/
-/*	MyRC.pitch    = hal.rcin->read(1); 		//Palanca derecha: abajo y arriba de 1004 a 2000, 1500 nominal
-	MyRC.throttle = hal.rcin->read(2);		//Palanca izquierda: abajo y arriba de 1004 a 2000, 1004 nominal
-	MyRC.yaw      = hal.rcin->read(3);		//Palanca izuierda : derecha a izquierda de 1000 a 1980, 1500 nominal
-	MyRC.aux_1    = hal.rcin->read(4);		// SW -> regulador izquierdo de 999 a 2000
-	MyRC.aux_2    = hal.rcin->read(5);		// VRB -> regulador derecho de 999 a 2000
-
-
-	PWM_Roll = MyRC.roll;
-	if(MyRC.aux_1>=1800){
-
-		hal.rcout->write(0,1900);
-//		hal.console->printf(" 1800 ");
-	}
-	else{
-		hal.rcout->write(0,1001);
-//		hal.console->printf(" 1000 ");
-	}*/
-
-//	hal.rcout->cork();
-//	hal.rcout->write(2,(uint16_t)MyRC.throttle);
-	//hal.rcout->write(CH_4,(uint16_t)MyRC.throttle);
-//	hal.rcout->push();
-
-//	last_read =hal.rcout->read(CH_1);
-
-//	const Vector3f &Position_GPS = inertial_nav.get_velocity();
-
-//	hal.console->printf(" %d ",(int)copter.get_throttle_mid());
-//	hal.console->printf(" %f ",(float)g.IMU_deg_yaw);
-//	hal.scheduler->delay(500);
-
-//	hal.rcout->write(0,g.RC_roll);
-//	hal.rcout->write(1,g.RC_pitch);
-//	hal.rcout->write(2,g.RC_throttle);
-
-
-//	hal.rcout->write(CH_2, Mypwm);
-//	hal.rcout->write(CH_3, Mypwm);
-//
-//	Mypwm += Mydelta;
-//	if (Mydelta > 0 && Mypwm >= 2000) {
-//		Mydelta = -1;
-//		hal.console->printf(" 1 ");
-//	}
-//	if (Mydelta < 0 && Mypwm <= 1000) {
-//		Mydelta = 1;
-//		hal.console->printf(" 0 ");
-//	}
+	g.Bandera_10Hz = 1;
 }
 #endif
 
