@@ -1600,9 +1600,7 @@ public:
     using Mode::Mode;
 
     virtual void run() override;
-
     bool init(bool ignore_checks) override;
-
 
     bool requires_GPS() const override { return false; }
     bool has_manual_throttle() const override { return true; }
